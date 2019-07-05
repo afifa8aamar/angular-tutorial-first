@@ -5,7 +5,10 @@
 <div class="cart-item" *ngFor="let item of items">
     <span>{{item.name}}</span>
     <span>{{item.price | currency }}</span>
+    <button class="button" type="button" (click)="RemoveFromCart(item)">Delete</button>
 </div>
+
+<button class="button" type="button" *ngIf = "IsNotEmpty()" (click)="clearCart()" >Clear Cart</button>
 
 <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
     <div>
@@ -18,7 +21,7 @@
     </div>
     <button class="button" type="submit">Purchase</button>
     <p>
-        <button class="button" type="button" (click)= "setDefault()">Reset</button>
+        <button class="button" type="button" (click)="setDefault()">Reset</button>
     </p>
 </form>
 

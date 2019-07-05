@@ -19,6 +19,11 @@ export class CartService {
 
     getShippingPrices() {
         return this.http.get('/assets/shipping.json');
-    } 
+    }
+
+    RemoveFromCart(product) {
+        this.items.splice(this.items.indexOf(product), 1);
+        return this.items;
+    }
 
 }

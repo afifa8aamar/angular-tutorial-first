@@ -9,18 +9,18 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  items ;
+  items;
   checkoutForm;
   constructor(private CartService: CartService, private formBuilder: FormBuilder) {
     this.items = this.CartService.getItems();
     this.checkoutForm = this.formBuilder.group({
-      name : '',
-      address : ''
+      name: '',
+      address: ''
     })
   }
 
   onSubmit(customerData) {
-    console.warn("Your order has been submitted" , customerData);
+    console.warn("Your order has been submitted", customerData);
     this.items = this.CartService.clearCart();
     this.checkoutForm.reset();
   }
@@ -28,17 +28,26 @@ export class CartComponent implements OnInit {
   ngOnInit() {
   }
 
-  setDefault () {
+  setDefault() {
     this.checkoutForm.get('name').setValue("John Boe");
     this.checkoutForm.get('address').setValue("Tbilisi");
   }
 
-  deleteItem(product) {
-    for (let item of this.items) {
-        if (product == item) {
-            this.items.slice(this.items.indexOf(item),1);
-            window.alert(item + ` has been Deleted from cart`)
-        }
-    }      
-}
+  RemoveFromCart(product) {
+    window.alert("Your product has been deleted");
+    this.CartService.RemoveFromCart(product);
+    this.items = this.CartService.getItems();
+  }
+
+  IsNotEmpty () {
+    if (this.CartService.getItems().length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  clearCart() {
+    this.CartService.clearCart();
+    this.items = this.CartService.getItems();
+  }
 }
