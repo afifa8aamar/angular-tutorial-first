@@ -15,5 +15,13 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  deleteItem(product) {
+    for (let item of this.items) {
+        if (product == item) {
+            this.items.slice(this.items.indexOf(item),1);
+            window.alert(item + ` has been Deleted from cart`)
+        }
+    }      
+}
 }
