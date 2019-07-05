@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 
 
 import { products } from '../products';
-import { parseLazyRoute } from '@angular/compiler/src/aot/lazy_routes';
+import { CartService } from '../cart.service'
 @Component ({
     selector: 'app-product-details',
     templateUrl: './product-details.component.html',
@@ -12,11 +12,16 @@ import { parseLazyRoute } from '@angular/compiler/src/aot/lazy_routes';
 
 export class ProductDetailsComponent implements OnInit{
     product;
-    constructor(private route: ActivatedRoute)  { }
+    constructor(private route: ActivatedRoute , private CartServise :CartService)  { }
     ngOnInit() {
-        this.route.paramMap.subscribe( params => {
-            this.product = products[+params.get('productId')];
-        })
+        this.route.paramMap.subscribe(params => {
+          this.product = products[+params.get('productId')];
+        });
+      }
+
+    addToCart(product){
+        window.alert("Your product has been added to the cart")
+        this.CartServise.addToCart(product);
     }
 
 }
