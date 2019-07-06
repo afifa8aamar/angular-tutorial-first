@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { WishlistService } from '../wishlist.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -7,17 +8,30 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./wishlist.component.scss']
 })
 export class WishlistComponent implements OnInit {
-  product;
-  constructor(private route: ActivatedRoute) { }
-
+  items;
+  constructor(private route: ActivatedRoute, private WishlistService: WishlistService) {
+    this.items = this.WishlistService.getItems();
+  }
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.product = products[+params.get('productId')];
+      this.WishlistService = this.WishlistService[+params.get('productId')];
     });
   }
 
-  addToWishlist(product) {
-    window.alert("Your product has been added to the cart")
-    //this.CartServise.addToCart(product);
+  RemoveFromWishlist(product) {
+    this.WishlistService.RemoveFromWishlist(product);
+    this.items = this.WishlistService.getItems();
+  }
+
+  IsNotEmpty() {
+    if (this.WishlistService.getItems().length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  clearWishlist() {
+    this.WishlistService.clearWishlist();
+    this.items = this.WishlistService.getItems();
   }
 }

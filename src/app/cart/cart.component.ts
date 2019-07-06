@@ -34,7 +34,6 @@ export class CartComponent implements OnInit {
   }
 
   RemoveFromCart(product) {
-    window.alert("Your product has been deleted");
     this.CartService.RemoveFromCart(product);
     this.items = this.CartService.getItems();
   }

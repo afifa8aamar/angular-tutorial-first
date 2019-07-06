@@ -82,13 +82,17 @@ p {
     cursor: auto;
   }
   /* Fancy Button */
-  .fancy-button {
+  .fancy-button , .favorite {
     background-color: white;
     color: #1976d2;
   }
-  .fancy-button i.material-icons {
+  .fancy-button i.material-icons , .favorite{
     color: #1976d2;
     padding-right: 4px;
+  }
+
+  div .wishlist {
+    margin-right: 10px;
   }
   /* Top Bar */
   app-top-bar {
@@ -106,6 +110,7 @@ p {
     }
   }
   /* Checkout Cart, Shipping Prices */
+  .whishlist-item,
   .cart-item,
   .shipping-item {
     width: 100%;

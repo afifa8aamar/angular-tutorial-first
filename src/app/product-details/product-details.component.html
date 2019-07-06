@@ -6,5 +6,5 @@
   <p>{{ product.description }}</p>
 
   <button (click) ="addToCart(product)" *ngIf="!isAdded(product)">Buy</button>
-  <button (click) ="addTowishList(product)">Add To wishlist</button>
+  <button class="wish-list" (click) ="addToWishlist(product)">Add To wishlist</button>
 </div>

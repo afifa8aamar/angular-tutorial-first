@@ -1,1 +1,10 @@
-<p>wishlist works!</p>
+<h2>Your Wishlist</h2>
+
+
+<div class="whishlist-item" *ngFor="let item of items">
+    <span>{{item.name}}</span>
+    <span>{{item.price | currency }}</span>
+    <button class="button" type="button" (click)="RemoveFromWishlist(item)">Delete</button>
+</div>
+
+<!-- <button class="button" type="button" *ngIf = "IsNotEmpty()" (click)="clearWishlist()" >Clear Wish list</button> -->

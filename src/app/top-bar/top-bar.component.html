@@ -1,13 +1,17 @@
 <a [routerLink]="['/']">
     <h1>My Store</h1>
 </a>
-<p [routerLink]="['wishlist']" class="button fancy-button">
-        <i class="icon-heart"></i>
-    WishList
-</p>
 
-<a [routerLink]="['cart']" class="button fancy-button">
-    <i class="material-icons">shopping_cart</i>
-    Checkout
-</a>
+<div>
+    <a [routerLink]="['wishlist']" class="button fancy-button wishlist">
+        <i class="material-icons">
+            favorite
+        </i>
+        WishList
+    </a>
 
+    <a [routerLink]="['cart']" class="button fancy-button">
+        <i class="material-icons">shopping_cart</i>
+        Checkout
+    </a>
+</div>

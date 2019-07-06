@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 
 import { products } from '../products';
 import { CartService } from '../cart.service'
+import { WishlistService } from '../wishlist.service';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -13,7 +14,7 @@ import { CartService } from '../cart.service'
 export class ProductDetailsComponent implements OnInit {
   product;
 
-  constructor(private route: ActivatedRoute, private CartServise: CartService) { }
+  constructor(private route: ActivatedRoute, private CartServise: CartService, private WishlistService : WishlistService) { }
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.product = products[+params.get('productId')];
@@ -27,6 +28,11 @@ export class ProductDetailsComponent implements OnInit {
 
   isAdded(product) {
     return this.CartServise.getItems().includes(product)
+  }
+
+  addToWishlist(product) {
+    window.alert("Your product has been added to wishlist")
+    this.WishlistService.addToWishlist(product);
   }
 
 }
