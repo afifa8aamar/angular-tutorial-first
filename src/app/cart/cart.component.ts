@@ -15,7 +15,12 @@ export class CartComponent implements OnInit {
     this.items = this.CartService.getItems();
     this.checkoutForm = this.formBuilder.group({
       name: '',
-      address: ''
+      address: this.formBuilder.group({
+        street: '',
+        city: '',
+        state: '',
+        zip: ''
+      })
     })
   }
 
@@ -31,10 +36,7 @@ export class CartComponent implements OnInit {
   setDefault() {
     // this.checkoutForm.get('name').setValue("John Boe");
     // this.checkoutForm.get('address').setValue("Tbilisi");
-    this.checkoutForm.patchValue({
-      name: 'John Doe',
-      address: 'Georgia'
-    })
+    this.checkoutForm.patchValue({ name: 'John Doe' });
   }
 
   RemoveFromCart(product) {
@@ -42,7 +44,7 @@ export class CartComponent implements OnInit {
     this.items = this.CartService.getItems();
   }
 
-  IsNotEmpty () {
+  IsNotEmpty() {
     if (this.CartService.getItems().length > 0) {
       return true;
     } else {
