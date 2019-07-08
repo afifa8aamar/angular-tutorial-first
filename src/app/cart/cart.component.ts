@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
-import { Validators, FormBuilder } from '@angular/forms';
+import {
+  Validators,
+  FormBuilder,
+  FormGroup,
+  FormControl
+} from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -10,17 +15,19 @@ import { Validators, FormBuilder } from '@angular/forms';
 export class CartComponent implements OnInit {
 
   items;
-  checkoutForm;
+  checkoutForm: FormGroup;
   constructor(private CartService: CartService, private formBuilder: FormBuilder) {
     this.items = this.CartService.getItems();
     this.checkoutForm = this.formBuilder.group({
-      name: ['', [Validators.minLength(2)]],
+      name: ['', [this.forbiddenName(),Validators.minLength(4)]],
       address: this.formBuilder.group({
         street: '',
         city: '',
         state: '',
         zip: ''
-      })
+      }, {
+          validators: this.crossValidation
+        })
     })
   }
 
@@ -54,5 +61,46 @@ export class CartComponent implements OnInit {
   clearCart() {
     this.CartService.clearCart();
     this.items = this.CartService.getItems();
+  }
+  get name() {
+    return this.checkoutForm.get('name') as FormControl;
+  }
+  get address() {
+    return this.checkoutForm.get('address') as FormGroup;
+  }
+  get city() {
+    return this.checkoutForm.get('address').get('city') as FormControl;
+  }
+  get zip() {
+    return this.checkoutForm.get('address').get('zip') as FormControl;
+  }
+  get state() {
+    return this.checkoutForm.get('address').get('state') as FormControl;
+  }
+  static isZipValid(zip) {
+    return zip.length < 3;
+  }
+  static isCityValid(city) {
+    return city && city[0].toLowerCase() === 'a';
+  }
+  crossValidation(FormGroup) {
+    const zip = FormGroup.get('zip').value;
+    const zipStatus = CartComponent.isZipValid(zip);
+
+    const city = FormGroup.get('city').value;
+    const cityStatus = CartComponent.isCityValid(city);
+
+    const validationResult = {
+      zipStatus,
+      cityStatus
+    }
+
+    return validationResult.zipStatus && validationResult.cityStatus ? null : validationResult;
+  }
+
+  forbiddenName() {
+    return (FormControl) => {
+      return FormControl.value === 'Oliver' ? { forbiddenName: { invalid: true } } : null;
+    }
   }
 }
