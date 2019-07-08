@@ -1,0 +1,99 @@
+<h3>Register</h3>
+
+<form [formGroup]="registerForm">
+    <div class="register-form">
+        <label>
+            E-mail:
+            <input type="email" required formControlName="email">
+            <div *ngIf='email.invalid && (email.dirty || email.touched)'>
+                <div class="General-Error" *ngIf='email.errors.required'>
+                    E-mail is required.
+                </div>
+            </div>
+        </label>
+
+        <label>
+            Password:
+            <input type="text" required formControlName="password">
+            <div *ngIf='password.invalid && (password.dirty || password.touched)'>
+                <div class="General-Error" *ngIf='password.errors.required'>
+                    Password is required.
+                </div>
+            </div>
+        </label>
+        <label>
+            Confirm Password:
+            <input type="text" required formControlName="confirm">
+            <div *ngIf='confirm.invalid && (confirm.dirty || confirm.touched)'>
+                <div class="General-Error" *ngIf='confirm.errors.required'>
+                    This field is required.
+                </div>
+            </div>
+        </label>
+        <label>
+            Nickname:
+            <input type="text" required formControlName="nickname">
+            <div *ngIf='nickname.invalid && (nickname.dirty || nickname.touched)'>
+                <div class="General-Error" *ngIf='nickname.errors.required'>
+                    This field is required.
+                </div>
+            </div>
+        </label>
+        <label>
+            Phone Number:
+            <input type="text" required formControlName="phone">
+            <div *ngIf='phone.invalid && (phone.dirty || phone.touched)'>
+                <div class="General-Error" *ngIf='phone.errors.required'>
+                    This field is required.
+                </div>
+            </div>
+        </label>
+        <label>
+            Website:
+            <input type="text" required formControlName="website">
+            <div *ngIf='website.invalid && (website.dirty || website.touched)'>
+                <div class="General-Error" *ngIf='website.errors.required'>
+                    This field is required.
+                </div>
+            </div>
+        </label>
+        <input type="checkbox" required formControlName="agreement">I have read the <a href="#">agreement</a> <br>
+        <div *ngIf='website.invalid && (website.dirty || website.touched)'>
+            <div class="General-Error" *ngIf='website.errors.required'>
+                Please read the Agreement. 
+            </div>
+        </div>
+        <button type="submit">Register</button>
+    </div>
+</form>
+
+
+<div>
+    <h3>Custumer</h3>
+    <p>
+        E-mail: {{email.value}}
+    </p>
+    <p>
+        password: {{password.value}}
+    </p>
+    <p>
+        Confirm Password: {{confirm.value}}
+    </p>
+    <p>
+        Nickname: {{nickname.value}}
+    </p>
+    <p>
+        Phone Number: {{phone.value}}
+    </p>
+    <p>
+        Website: {{website.value}}
+    </p>
+    <p>
+        Agreement: {{agreement.value}}
+    </p>
+</div>
+
+<div>
+    <h3>Errors:</h3>
+
+</div>

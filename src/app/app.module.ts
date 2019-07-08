@@ -11,7 +11,8 @@ import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component'
 import { HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { WishlistComponent } from './wishlist/wishlist.component'
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { RegisterComponent } from './register/register.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { WishlistComponent } from './wishlist/wishlist.component'
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    WishlistComponent
+    WishlistComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { WishlistComponent } from './wishlist/wishlist.component'
       {path: 'products/:productId', component: ProductDetailsComponent},
       {path: 'cart', component: CartComponent},
       {path: 'shipping', component: ShippingComponent},
-      {path: 'wishlist', component: WishlistComponent}
+      {path: 'wishlist', component: WishlistComponent},
+      {path: 'register', component: RegisterComponent}
     ]),
     ReactiveFormsModule
   ],
