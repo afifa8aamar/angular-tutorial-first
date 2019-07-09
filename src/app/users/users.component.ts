@@ -22,8 +22,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.users = UserService;
+      this.users = this.users[+params.get('userId')];
     });
   }
-
 }

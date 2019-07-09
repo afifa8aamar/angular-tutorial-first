@@ -13,7 +13,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RegisterComponent } from './register/register.component';
-import { UsersComponent } from './users/users.component'
+import { UsersComponent } from './users/users.component';
+import { CurrencyComponent } from './currency/currency.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UsersComponent } from './users/users.component'
     ShippingComponent,
     WishlistComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    CurrencyComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { UsersComponent } from './users/users.component'
       {path: 'shipping', component: ShippingComponent},
       {path: 'wishlist', component: WishlistComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'users' , component: UsersComponent}
+      {path: 'users' , component: UsersComponent},
+      {path: 'currency' , component: CurrencyComponent}
     ]),
     ReactiveFormsModule
   ],
