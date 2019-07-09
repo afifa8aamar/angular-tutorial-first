@@ -4,96 +4,88 @@
     <div class="register-form">
         <label>
             E-mail:
-            <input type="email" required formControlName="email">
+            <input type="email" formControlName="email">
             <div *ngIf='email.invalid && (email.dirty || email.touched)'>
-                <div class="General-Error" *ngIf='email.errors.required'>
-                    E-mail is required.
+                <div class="General-Error" *ngIf="email.errors?.Required">
+                    {{email.errors.Required.message}}
+                </div>
+                <div class="General-Error" *ngIf="email.errors?.InvalidEmail">
+                    {{email.errors?.InvalidEmail.message}}
                 </div>
             </div>
         </label>
-
-        <label>
-            Password:
-            <input type="text" required formControlName="password">
-            <div *ngIf='password.invalid && (password.dirty || password.touched)'>
-                <div class="General-Error" *ngIf='password.errors.required'>
-                    Password is required.
+        <div class="passwords-confirm" formGroupName="passwords">
+            <label>
+                Password:
+                <input type="text" formControlName="password">
+                <div *ngIf='password.invalid && (password.dirty || password.touched)'>
+                    <div class="General-Error" *ngIf="password.errors?.Required">
+                        {{password.errors.Required.message}}
+                    </div>
+                    <div class="General-Error" *ngIf="password.errors?.InvalidPassword">
+                        {{password.errors.InvalidPassword.message}}
+                    </div>
+                </div>
+            </label>
+            <label>
+                Confirm Password:
+                <input type="text" formControlName="confirm">
+                <div *ngIf='confirm.invalid && (confirm.dirty || confirm.touched)'>
+                    <div class="General-Error" *ngIf="confirm.errors?.Required">
+                        {{confirm.errors.Required.message}}
+                    </div>
+                </div>
+            </label>
+            <div *ngIf='passwords?.invalid && (passwords.dirty || passwords.touched)'>
+                <div class="General-Error" *ngIf="passwords.errors?.PasswordsShouldMatch">
+                    {{passwords.errors.PasswordsShouldMatch.message}}
                 </div>
             </div>
-        </label>
-        <label>
-            Confirm Password:
-            <input type="text" required formControlName="confirm">
-            <div *ngIf='confirm.invalid && (confirm.dirty || confirm.touched)'>
-                <div class="General-Error" *ngIf='confirm.errors.required'>
-                    This field is required.
-                </div>
-            </div>
-        </label>
+        </div>
         <label>
             Nickname:
-            <input type="text" required formControlName="nickname">
+            <input type="text" formControlName="nickname">
             <div *ngIf='nickname.invalid && (nickname.dirty || nickname.touched)'>
-                <div class="General-Error" *ngIf='nickname.errors.required'>
-                    This field is required.
+                <div class="General-Error" *ngIf="nickname.errors?.Required">
+                    {{nickname.errors.Required.message}}
+                </div>
+                <div class="General-Error" *ngIf="nickname.errors?.InvalidNickname">
+                    {{nickname.errors.InvalidNickname?.message}}
                 </div>
             </div>
         </label>
         <label>
             Phone Number:
-            <input type="text" required formControlName="phone">
+            <input type="text" formControlName="phone">
             <div *ngIf='phone.invalid && (phone.dirty || phone.touched)'>
-                <div class="General-Error" *ngIf='phone.errors.required'>
-                    This field is required.
+                <div class="General-Error" *ngIf="phone.errors?.Required">
+                    {{phone.errors.Required.message}}
+                </div>
+                <div class="General-Error" *ngIf="phone.errors?.InvalidPhone">
+                    {{phone.errors.InvalidPhone.message}}
                 </div>
             </div>
         </label>
         <label>
             Website:
-            <input type="text" required formControlName="website">
+            <input type="url" formControlName="website">
             <div *ngIf='website.invalid && (website.dirty || website.touched)'>
-                <div class="General-Error" *ngIf='website.errors.required'>
-                    This field is required.
+                <div class="General-Error" *ngIf="website.errors?.Required">
+                    {{website.errors.Required.message}}
+                </div>
+                <div class="General-Error" *ngIf="website.errors?.InvalidWebsite">
+                    {{website.errors.InvalidWebsite.message}}
                 </div>
             </div>
         </label>
-        <input type="checkbox" required formControlName="agreement">I have read the <a href="#">agreement</a> <br>
-        <div *ngIf='website.invalid && (website.dirty || website.touched)'>
-            <div class="General-Error" *ngIf='website.errors.required'>
-                Please read the Agreement. 
+        <input type="checkbox" formControlName="agreement">I have read the <a href="#">agreement</a> <br>
+        <div *ngIf='agreement.invalid && (agreement.dirty || agreement.touched)'>
+            <div class="General-Error" *ngIf="agreement.errors?.Required">
+                {{agreement.errors.Required.message}}
             </div>
         </div>
-        <button type="submit">Register</button>
+        <div>
+            <button type="submit" (click)="setUser(registerForm)">Register</button>
+        </div>
     </div>
 </form>
-
-
-<div>
-    <h3>Custumer</h3>
-    <p>
-        E-mail: {{email.value}}
-    </p>
-    <p>
-        password: {{password.value}}
-    </p>
-    <p>
-        Confirm Password: {{confirm.value}}
-    </p>
-    <p>
-        Nickname: {{nickname.value}}
-    </p>
-    <p>
-        Phone Number: {{phone.value}}
-    </p>
-    <p>
-        Website: {{website.value}}
-    </p>
-    <p>
-        Agreement: {{agreement.value}}
-    </p>
-</div>
-
-<div>
-    <h3>Errors:</h3>
-
-</div>
