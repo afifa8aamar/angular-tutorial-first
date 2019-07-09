@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { data } from './rates';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,9 @@ export class CurrencyService {
   Observer;
 
   constructor() {
-    this.result = data.rates;
-    this.Observer = {
-      result : this.result,
-      subscribe: this.subscribe,
-      filter : this.filter
-    };
+    this.result = this.transformObjectToArray(data.rates);
+    this.Observer = from(this.result);
+    console.log(this.Observer)
   }
 
   subscribe(next, complete) {
