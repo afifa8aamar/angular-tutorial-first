@@ -1,65 +1,48 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, Component } from '@angular/core';
 
-import { data } from './rates';
-import { from } from 'rxjs';
+import { data } from './currencies';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrencyService {
-  result;
+  currencies;
   Observer;
 
-  constructor() {
-    this.result = this.transformObjectToArray(data.rates);
-    this.Observer = from(this.result);
+  constructor(private HttpClient: HttpClient) {
+    this.currencies = data;
+    this.Observer = new Observable(this.subscribe());
     console.log(this.Observer)
   }
 
-  subscribe(next, complete) {
-    let i = 0;
-    const keys = Object.keys(this.result);
-    const size = this.result.length;
+  subscribe() {
+    return (subscriber) => {
+      let i = 0;
+      const size = this.currencies.length;
 
-    for (const key of keys) {
-      const value = this.result[key];
-      const item = {
-        currency: key,
-        value
-      };
-      setTimeout(() => {
-        next(item);
-      }, 100 * i);
-      i++;
+      from(this.currencies).subscribe((currency) => {
+        const url = `https://api.exchangeratesapi.io/latest?symbols=${currency}`;
+        this.HttpClient.get(url).subscribe((value) => {
+          i++;
+          subscriber.next(value);
+          if (i === size) {
+            subscriber.complete();
+          }
+        });
+      });
     }
-    setTimeout(() => {
-      complete(size);
-    }, 100 * i);
-  }
-
-  transformObjectToArray(obj) {
-    const items = [];
-    const keys = Object.keys(obj);
-
-    for (const key of keys) {
-      const value = obj[key];
-      const item = {
-        currency: key,
-        value
-      }
-      items.push(item)
-    }
-    return items;
   }
 
   filter(cb) {
-    this.result = this.result.filter(cb);
+    this.currencies = this.currencies.filter(cb);
     return this;
   }
 
 
-  map (cb) {
-    this.result = this.result.map(cb);
+  map(cb) {
+    this.currencies = this.currencies.map(cb);
     return this;
   }
 
