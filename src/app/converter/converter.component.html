@@ -8,7 +8,8 @@
                 {{currency.name}}
             </option>
         </select>
-        <input type="number" matInput formControlName="value1" value={{setInput1()}} (change) = 'getInput1(input1)' class="style" #input1>
+        <input type="number" matInput formControlName="value1" value={{setInput1()}} (input)='getInput1(input1)'
+            class="style" #input1>
     </div>
     <div>
         <select class="input input-2 style" (change)="getCurrency2($event.target)">
@@ -17,7 +18,8 @@
                 {{currency.name}}
             </option>
         </select>
-        <input type="number" matInput formControlName="value2" value={{setInput2()}}  (change) = 'getInput2(input2)' class="style" #input2>
+        <input type="number" matInput formControlName="value2" value={{setInput2()}} (input)='getInput2(input2)'
+            class="style" #input2>
     </div>
 
 </form>
