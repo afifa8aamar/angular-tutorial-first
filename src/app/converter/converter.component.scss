@@ -1,0 +1,16 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.input-selectors {
+    display: flex;
+    flex-direction: row;
+}
+
+.style {
+    width: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.button {
+    margin-left: 65px;
+}

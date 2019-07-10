@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
-import { CurrencyComponent } from './currency/currency.component'
+import { CurrencyComponent } from './currency/currency.component';
+import { ConverterComponent } from './converter/converter.component';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -28,12 +32,15 @@ import { CurrencyComponent } from './currency/currency.component'
     WishlistComponent,
     RegisterComponent,
     UsersComponent,
-    CurrencyComponent
+    CurrencyComponent,
+    ConverterComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatInputModule,
     RouterModule.forRoot([
       {path: '', component: ProductListComponent},
       {path: 'products/:productId', component: ProductDetailsComponent},
@@ -42,9 +49,13 @@ import { CurrencyComponent } from './currency/currency.component'
       {path: 'wishlist', component: WishlistComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'users' , component: UsersComponent},
-      {path: 'currency' , component: CurrencyComponent}
+      {path: 'currency' , component: CurrencyComponent},
+      {path: 'converter' , component: ConverterComponent}
     ]),
     ReactiveFormsModule
+  ],
+  exports : [
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

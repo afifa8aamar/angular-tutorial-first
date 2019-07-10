@@ -68,4 +68,6 @@ export class RegisterComponent implements OnInit {
   get agreement() {
     return this.registerForm.get('agreement') as FormControl;
   }
+
+  
 }

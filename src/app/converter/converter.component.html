@@ -1,0 +1,23 @@
+<h2>Converter</h2>
+
+<form class="input-selectors" [formGroup]="converterForm">
+    <div>
+        <select class="input input-1 style" (change)="getCurrency1($event.target)">
+            <option *ngFor="let currency of currencies" value="currency1" [value]="currency.name"
+                class="list-group-item">
+                {{currency.name}}
+            </option>
+        </select>
+        <input type="number" matInput formControlName="value1" value={{setValue1(input1)}} class="style" #input1>
+    </div>
+    <div>
+        <select class="input input-2 style" (change)="getCurrency2($event.target)">
+            <option *ngFor="let currency of currencies" value="currency2" [value]="currency.name"
+                class="list-group-item">
+                {{currency.name}}
+            </option>
+        </select>
+        <input type="number" matInput formControlName="value2" value={{setValue2(input2)}} class="style" #input2>
+    </div>
+
+</form>
