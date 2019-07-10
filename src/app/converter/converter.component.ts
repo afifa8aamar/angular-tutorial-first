@@ -67,12 +67,11 @@ export class ConverterComponent implements OnInit {
   }
 
   getValue1(currency) {
-    for (const cur of this.currencies) {
-      if (currency === cur.name) {
-        this.value1 = cur.value;
+    for (let i = 0 ; i < this.currencies.length ; i++) {
+      if (currency === this.currencies[i].name) {
+        this.value1= this.currencies[i].value;
       }
     }
-
     return this.value1;
   }
 

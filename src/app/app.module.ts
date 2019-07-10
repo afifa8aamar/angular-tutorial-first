@@ -58,7 +58,7 @@ import { ShippingService } from './shipping.service';
   exports : [
     MatInputModule
   ],
-  providers: [ShippingService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@ import { ShippingService } from './../shipping.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+  providers: [ShippingService],
   selector: 'app-shipping',
   templateUrl: './shipping.component.html',
   styleUrls: ['./shipping.component.scss']
