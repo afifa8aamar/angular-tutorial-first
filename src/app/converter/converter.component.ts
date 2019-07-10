@@ -9,14 +9,13 @@ import { AbstractControl, ValidationErrors, FormBuilder, FormGroup, FormControl 
   styleUrls: ['./converter.component.scss']
 })
 export class ConverterComponent implements OnInit {
-  currencies: { name: string, value: object }[];
+  currencies: { name: string, value: number }[];
   currency1: string = "CAD";
   currency2: string = "CAD";
   value1: number = 0;
   value2: number = 0;
   input1: number = 0;
   input2: number = 0;
-  private inputVar: string;
   converterForm: FormGroup;
 
   private url = 'https://api.exchangeratesapi.io/latest?';
@@ -32,13 +31,13 @@ export class ConverterComponent implements OnInit {
     this.http.get(this.url).subscribe(response => {
       this.currencies = response['rates'];
 
-      type cur = { name: string, value: object };
+      type cur = { name: string, value: number };
       let currenciesArray: cur[] = [];
       const keys = Object.keys(this.currencies);
       const values = Object.values(this.currencies);
       for (let i = 0; i < keys.length; i++) {
         let name = keys[i];
-        let value: object = values[i];
+        let value: number = values[i].value;
         let finalObj: cur = { name, value }
         currenciesArray.push(finalObj);
       }
@@ -53,24 +52,37 @@ export class ConverterComponent implements OnInit {
     this.currency2 = currency.value;
   }
   getInput1(input) {
-    this.value1 = input.value;
+    this.input1 = input.value;
   }
   getInput2(input) {
-    this.value2 = input.value;
+    this.input2 = input.value;
   }
 
-  setValue1() {
-    return this.convert();
+  setInput1() {
+    return this.input2 * this.getValue1(this.currency1);
   }
 
-  setValue2() {
-    return this.convert();
+  setInput2() {
+    return this.input1 / this.getValue2(this.currency2);
   }
 
-  convert() {
-    if (this.input1)
-      return this.input1 / this.value2;
-    return this.input2 * this.value1;
+  getValue1(currency) {
+    for (const cur of this.currencies) {
+      if (currency === cur.name) {
+        this.value1 = cur.value;
+      }
+    }
+
+    return this.value1;
+  }
+
+  getValue2(currency) {
+    for (const cur of this.currencies) {
+      if (currency === cur.name) {
+        this.value2 = cur.value;
+      }
+    }
+    return this.value2;
   }
 
   static InvalidInput(value): ValidationErrors | null {
