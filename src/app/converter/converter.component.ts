@@ -58,21 +58,22 @@ export class ConverterComponent implements OnInit {
   }
 
   setInput1() {
-    for(let i = 0 ; i < this.currencies.length; i++) {
-      if(this.currency1 == this.currencies[i].name)
+    if (this.currency1 == this.currency2)
+      return this.input2;
+    for (let i = 0; i < this.currencies.length; i++) {
+      if (this.currency1 == this.currencies[i].name)
         this.value1 = this.currencies[i].value;
     }
-    console.log(this.input1, this.input2, this.currency1, this.currency2, this.value1, this.value2)
     return this.input2 * this.value1;
   }
 
   setInput2() {
-    for(let i = 0 ; i < this.currencies.length; i++) {
-      if(this.currency2 == this.currencies[i].name)
+    if (this.currency1 == this.currency2)
+      return this.input1;
+    for (let i = 0; i < this.currencies.length; i++) {
+      if (this.currency2 == this.currencies[i].name)
         this.value2 = this.currencies[i].value;
     }
-    // console.log(this.value2);
-    // console.log(this.input1, this.input2, this.currency1, this.currency2, this.value1, this.value2)
     return this.input1 * this.value2;
   }
 
