@@ -19,6 +19,7 @@ import { CurrencyComponent } from './currency/currency.component';
 import { ConverterComponent } from './converter/converter.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material';
+import { ShippingService } from './shipping.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { MatInputModule } from '@angular/material';
   exports : [
     MatInputModule
   ],
-  providers: [],
+  providers: [ShippingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
