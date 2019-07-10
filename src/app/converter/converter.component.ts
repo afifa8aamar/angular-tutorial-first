@@ -9,21 +9,20 @@ import { AbstractControl, ValidationErrors, FormBuilder, FormGroup, FormControl 
   styleUrls: ['./converter.component.scss']
 })
 export class ConverterComponent implements OnInit {
-  currencies: { name: string, value: number }[];
+  currencies: Array<{ name: string, value: object }> = [];
   currency1: string = "CAD";
   currency2: string = "CAD";
-  value1: number = 0;
-  value2: number = 0;
+  value1;
+  value2;
   input1: number = 0;
   input2: number = 0;
   converterForm: FormGroup;
 
   private url = 'https://api.exchangeratesapi.io/latest?';
-  private url1 = 'https://api.exchangeratesapi.io/latest?symbols=${currency}';
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {
     this.converterForm = formBuilder.group({
-      value1: ['', ConverterComponent.InvalidInput],
-      value2: ['', ConverterComponent.InvalidInput]
+      value1: "",
+      value2: ""
     });
   }
 
@@ -31,13 +30,13 @@ export class ConverterComponent implements OnInit {
     this.http.get(this.url).subscribe(response => {
       this.currencies = response['rates'];
 
-      type cur = { name: string, value: number };
+      type cur = { name: string, value: object };
       let currenciesArray: cur[] = [];
       const keys = Object.keys(this.currencies);
       const values = Object.values(this.currencies);
       for (let i = 0; i < keys.length; i++) {
         let name = keys[i];
-        let value: number = values[i].value;
+        let value = values[i];
         let finalObj: cur = { name, value }
         currenciesArray.push(finalObj);
       }
@@ -59,37 +58,24 @@ export class ConverterComponent implements OnInit {
   }
 
   setInput1() {
-    return this.input2 * this.getValue1(this.currency1);
+    for(let i = 0 ; i < this.currencies.length; i++) {
+      if(this.currency1 == this.currencies[i].name)
+        this.value1 = this.currencies[i].value;
+    }
+    console.log(this.input1, this.input2, this.currency1, this.currency2, this.value1, this.value2)
+    return this.input2 * this.value1;
   }
 
   setInput2() {
-    return this.input1 / this.getValue2(this.currency2);
-  }
-
-  getValue1(currency) {
-    for (let i = 0 ; i < this.currencies.length ; i++) {
-      if (currency === this.currencies[i].name) {
-        this.value1= this.currencies[i].value;
-      }
-    }
-    return this.value1;
-  }
-
-  getValue2(currency) {
-    for (let i = 0 ; i < this.currencies.length ; i++) {
-      if (currency === this.currencies[i].name) {
+    for(let i = 0 ; i < this.currencies.length; i++) {
+      if(this.currency2 == this.currencies[i].name)
         this.value2 = this.currencies[i].value;
-      }
     }
-    return this.value2;
+    // console.log(this.value2);
+    // console.log(this.input1, this.input2, this.currency1, this.currency2, this.value1, this.value2)
+    return this.input1 * this.value2;
   }
 
-  static InvalidInput(value): ValidationErrors | null {
-    const pattern = /^[0-9\.]+$/i;
-    if ((value != "") && !pattern.test(value))
-      return { InvalidInput: { message: "Provide valid value" } }
-    return null;
-  }
 
 
 }
