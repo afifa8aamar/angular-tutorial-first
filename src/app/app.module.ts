@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -20,6 +19,10 @@ import { ConverterComponent } from './converter/converter.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material';
 import { ShippingService } from './shipping.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewsComponent } from './news/news.component';
+import { ArticleComponent } from './article/article.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,10 @@ import { ShippingService } from './shipping.service';
     UsersComponent,
     CurrencyComponent,
     ConverterComponent,
+    DashboardComponent,
+    NewsComponent,
+    ArticleComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -51,7 +58,11 @@ import { ShippingService } from './shipping.service';
       {path: 'register', component: RegisterComponent},
       {path: 'users' , component: UsersComponent},
       {path: 'currency' , component: CurrencyComponent},
-      {path: 'converter' , component: ConverterComponent}
+      {path: 'converter' , component: ConverterComponent},
+      {path: 'dashboard' , component: DashboardComponent},
+      {path: 'dashboard/news' , component: NewsComponent},
+      {path: 'dashboard/news/:articleId' , component: ArticleComponent},
+      {path: 'error-page' , component: ErrorPageComponent},
     ]),
     ReactiveFormsModule,
     FormsModule
