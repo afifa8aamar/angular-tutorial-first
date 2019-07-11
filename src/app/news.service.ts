@@ -11,9 +11,9 @@ export class NewsService {
     return this.articles;
   }
 
-  // getArticle (id) {
-  //   return this.articles.find(article) => {
-
-  //   }
-  // }
+  getArticle(id) {
+    return this.articles.find((article) => {
+      return article.id === id;
+    } );
+  }
 }

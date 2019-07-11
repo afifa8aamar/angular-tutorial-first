@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-app';
+  breadcrumbList = [];
+
+  constructor(private routerService: Router, private activatedRoute: ActivatedRoute) {
+
+  }
+
+  ngOnInit() {
+    this.ListeningRouting()
+  }
+
+  ListeningRouting() {
+    this.routerService.events.pipe(
+      filter((event) =>  event instanceof NavigationEnd )
+    )
+      .subscribe(() => {
+        this.breadcrumbList = [];
+        const paths = this.routerService.url.split('/').slice(1);
+
+        for (const path of paths) {
+          const router = this.routerService.config.find((item) => { return item.path.includes(path) })
+          if (router) {
+            this.breadcrumbList.push(router);
+          } else {
+            this.breadcrumbList.push(this.activatedRoute.firstChild.snapshot)
+          }
+        }
+
+
+      })
+  }
 }

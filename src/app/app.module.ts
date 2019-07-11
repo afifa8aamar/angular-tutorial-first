@@ -9,14 +9,14 @@ import { ProductListComponent } from './product-list/product-list.component'
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component'
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { ConverterComponent } from './converter/converter.component';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material';
 import { ShippingService } from './shipping.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -50,24 +50,24 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     HttpClientModule,
     MatInputModule,
     RouterModule.forRoot([
-      {path: '', component: ProductListComponent},
-      {path: 'products/:productId', component: ProductDetailsComponent},
-      {path: 'cart', component: CartComponent},
-      {path: 'shipping', component: ShippingComponent},
-      {path: 'wishlist', component: WishlistComponent},
-      {path: 'register', component: RegisterComponent},
-      {path: 'users' , component: UsersComponent},
-      {path: 'currency' , component: CurrencyComponent},
-      {path: 'converter' , component: ConverterComponent},
-      {path: 'dashboard' , component: DashboardComponent},
-      {path: 'dashboard/news' , component: NewsComponent},
-      {path: 'dashboard/news/:articleId' , component: ArticleComponent},
-      {path: 'error-page' , component: ErrorPageComponent},
+      { path: '', data: { name: 'Home' }, component: ProductListComponent },
+      { path: 'products/:productId', data: { name: 'Product' }, component: ProductDetailsComponent },
+      { path: 'cart', data: { name: 'Cart' }, component: CartComponent },
+      { path: 'shipping', data: { name: 'Shipping' }, component: ShippingComponent },
+      { path: 'wishlist', data: { name: 'Wishlist' }, component: WishlistComponent },
+      { path: 'register', data: { name: 'Register' }, component: RegisterComponent },
+      { path: 'users', data: { name: 'Users' }, component: UsersComponent },
+      { path: 'currency', data: { name: 'Currency' }, component: CurrencyComponent },
+      { path: 'converter', data: { name: 'Converter' }, component: ConverterComponent },
+      { path: 'dashboard', data: { name: 'Dashboard' }, component: DashboardComponent },
+      { path: 'dashboard/news', data: { name: 'News' }, component: NewsComponent },
+      { path: 'dashboard/news/:articleId', data: { name: 'Article' }, component: ArticleComponent },
+      { path: 'error-page', data: { name: 'Error' }, component: ErrorPageComponent },
     ]),
     ReactiveFormsModule,
     FormsModule
   ],
-  exports : [
+  exports: [
     MatInputModule
   ],
   providers: [],
