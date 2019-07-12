@@ -1,0 +1,28 @@
+.users-app {
+    display: flex;
+    flex-direction: column;
+    background-color: #1976d2;
+    border: 1px solid black;
+    span {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: 2px;
+        font-size: 14px;
+        cursor: pointer;
+        color: white;
+        border: none;
+    }
+    a { 
+        color: black;
+    }
+
+    input {
+        display: inline-flex;
+    }
+    button {
+        display: inline;
+        background-color: white;
+        color: #1976d2;
+    }
+}

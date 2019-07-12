@@ -8,9 +8,8 @@
         Convert
     </a>
 
-    <a [routerLink]="['users']" class="button fancy-button register">
+    <a [routerLink]="['users']" class="button fancy-button register" [hidden]='activate()'>
         <i class="material-icons">supervised_user_circle</i>
-        <i class="material-icons">edit</i>
         Users
     </a>
 

@@ -4,21 +4,15 @@
     <label>
         Nickname:
         <input formControlName='nickname' type="text">
-        <div *ngIf='nickname.invalid && (nickname.dirty || nickname.touched)'>
-            <div class="General-Error" *ngIf="nickname.errors?.InvalidNickname">
-                {{nickname.errors.InvalidNickname.message}}
-            </div>
-        </div>
     </label>
 
     <label>
         Password:
         <input formControlName='password' type="text">
-        <div *ngIf='password.invalid && (password.dirty || password.touched)'>
-            <div class="General-Error" *ngIf="password.errors?.InvalidPassword">
-                {{password.errors.InvalidPassword.message}}
-            </div>
-        </div>
     </label>
-    <button>Login</button>
+    <button type="button" (click)="allow(nickname, password)"
+        [routerLink]="redirect ? ['/users'] : ['/login']">Login</button>
 </form>
+
+
+<h3>Current Access: {{access}}</h3>

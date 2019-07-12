@@ -39,13 +39,11 @@ export class RegisterComponent implements OnInit {
   }
 
   setDefault() {
-    // this.checkoutForm.get('name').setValue("John Boe");
-    // this.checkoutForm.get('address').setValue("Tbilisi");
     this.registerForm.patchValue({
       email: 'afifa@gmail.com',
-      passwords :{
-        password : '1234567',
-        confirm:'1234567'
+      passwords: {
+        password: '1234567',
+        confirm: '1234567'
       },
       nickname: 'afifa',
       phone: '+380123654789',
@@ -53,10 +51,20 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  setUser(user: RegisterComponent) {
-    window.alert("Registered Successfully")
-    this.UserService.addUser(user);
-    window.alert(this.UserService.getUsers())
+  setUser(user: FormGroup) {
+    window.alert("Registered Successfully");
+    const obj = {
+      email: user.get('email').value,
+      passwords: {
+        password: user.get('passwords.password').value,
+        confirm: user.get('passwords.confirm').value
+      },
+      nickname: user.get('nickname').value,
+      phone: user.get('phone').value,
+      website: user.get('website').value,
+      agreement: user.get('agreement').value
+    }
+    this.UserService.addUser(obj);
   }
   get email() {
     return this.registerForm.get('email') as FormControl;

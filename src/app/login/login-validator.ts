@@ -1,9 +1,9 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 export class LoginValidator {
     static InvalidPassword(control: AbstractControl) {
         return new Promise((resolve) => {
-            if (control.value !== '1234')
+            if (control.value !== '123')
                 resolve({ InvalidPassword: { message: 'Invalid Password' } })
             else
                 resolve(null)

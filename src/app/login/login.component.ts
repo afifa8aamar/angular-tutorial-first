@@ -1,3 +1,6 @@
+import { UserService } from './../users.service';
+import { AuthService } from './../auth.service';
+import { LoginService } from './../login.service';
 import { LoginValidator } from './login-validator';
 import { FormBuilder, ValidatorFn, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -8,12 +11,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  redirect = false;
   LoginForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private LoginService: LoginService, private UserService: UserService) {
     this.LoginForm = this.formBuilder.group({
-      nickname: ['', , LoginValidator.InvalidNickname],
-      password: ['', , LoginValidator.InvalidPassword]
-    })
+      nickname: '',
+      password: ''
+    });
+    this.LoginService.blockAccess();
   }
 
   ngOnInit() {
@@ -26,5 +31,24 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.LoginForm.get('password') as FormControl;
   }
+
+
+  get access() {
+    return this.LoginService.isUserAuthenticated() ? 'Allowed' : 'Blocked'
+  }
+
+  allow(nickname, password) {
+    const user = this.UserService.getUsers().find(u => u.nickname == nickname.value);
+    if (user && nickname.value == user.nickname && password.value == user.passwords.password) {
+      this.redirect = true;
+      this.LoginService.allowAccess();
+    }
+    else {
+      this.LoginService.blockEdit();
+    }
+
+  }
+
+
 }
 ;
