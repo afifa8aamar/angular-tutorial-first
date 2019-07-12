@@ -4,7 +4,7 @@
     <button class="button" type="button" (click)="logout()" [disabled]="isAllowEdit()" [routerLink]="['/login']">Log
         out</button>
     <span>Email: <input value='{{user.email}}'></span>
-    <span>Nickname: <input value='{{user.nickname}}' #nickname></span>
+    <span>Nickname: <input value='{{user.nickname}}' #nickname [disabled]="true"></span>
     <span>Password: <input value='{{user.passwords.password}}'></span>
     <span>Confirm Password: <input value='{{user.passwords.confirm}}'></span>
     <span>Phone: <input value='{{user.phone}}'></span>

@@ -1,7 +1,6 @@
 import { UserService } from './../users.service';
 import { AuthService } from './../auth.service';
 import { LoginService } from './../login.service';
-import { LoginValidator } from './login-validator';
 import { FormBuilder, ValidatorFn, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
