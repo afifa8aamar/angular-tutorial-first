@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit {
   }
 
   isAllowEdit() {
-    return this.LoginService.isNotEditable ? true : false;
+    return this.LoginService.isNotEditable;
   }
   logout() {
     this.LoginService.blockAccess();
