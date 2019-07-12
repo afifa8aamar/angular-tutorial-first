@@ -3,7 +3,7 @@
 <form [formGroup]="registerForm">
     <div class="register-form">
         <label>
-            E-mail:
+            *E-mail:
             <input type="email" formControlName="email">
             <div *ngIf='email.invalid && (email.dirty || email.touched)'>
                 <div class="General-Error" *ngIf="email.errors?.Required">
@@ -16,7 +16,7 @@
         </label>
         <div class="passwords-confirm" formGroupName="passwords">
             <label>
-                Password:
+                *Password:
                 <input type="text" formControlName="password">
                 <div *ngIf='password.invalid && (password.dirty || password.touched)'>
                     <div class="General-Error" *ngIf="password.errors?.Required">
@@ -28,22 +28,21 @@
                 </div>
             </label>
             <label>
-                Confirm Password:
+                *Confirm Password:
                 <input type="text" formControlName="confirm">
                 <div *ngIf='confirm.invalid && (confirm.dirty || confirm.touched)'>
                     <div class="General-Error" *ngIf="confirm.errors?.Required">
                         {{confirm.errors.Required.message}}
                     </div>
                 </div>
-            </label>
-            <div *ngIf='passwords?.invalid && (passwords.dirty || passwords.touched)'>
-                <div class="General-Error" *ngIf="passwords.errors?.PasswordsShouldMatch">
-                    {{passwords.errors.PasswordsShouldMatch.message}}
+                <div class="General-Error"
+                    *ngIf="confirm.valid && passwords.invalid && passwords.errors?.PasswordsShouldMatch">
+                    {{passwords?.errors?.PasswordsShouldMatch?.message}}
                 </div>
-            </div>
+            </label>
         </div>
         <label>
-            Nickname:
+            *Nickname:
             <input type="text" formControlName="nickname">
             <div *ngIf='nickname.invalid && (nickname.dirty || nickname.touched)'>
                 <div class="General-Error" *ngIf="nickname.errors?.Required">
@@ -55,7 +54,7 @@
             </div>
         </label>
         <label>
-            Phone Number:
+            *Phone Number:
             <input type="text" formControlName="phone">
             <div *ngIf='phone.invalid && (phone.dirty || phone.touched)'>
                 <div class="General-Error" *ngIf="phone.errors?.Required">
@@ -67,7 +66,7 @@
             </div>
         </label>
         <label>
-            Website:
+            *Website:
             <input type="url" formControlName="website">
             <div *ngIf='website.invalid && (website.dirty || website.touched)'>
                 <div class="General-Error" *ngIf="website.errors?.Required">
@@ -85,7 +84,9 @@
             </div>
         </div>
         <div>
-            <button type="submit" (click)="setUser(registerForm)">Register</button>
+            <button type="submit" [disabled]='registerForm.errors?.InValidInputs'
+                (click)="setUser(registerForm)">Register</button>
+            <button class="btn" (click)='setDefault()'>Default</button>
         </div>
     </div>
 </form>

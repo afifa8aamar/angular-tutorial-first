@@ -26,6 +26,7 @@ import { ArticleComponent } from './article/article.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { GuardComponent } from './guard/guard.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { GuardComponent } from './guard/guard.component';
     ErrorPageComponent,
     AdminComponent,
     GuardComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -70,6 +72,7 @@ import { GuardComponent } from './guard/guard.component';
       { path: 'error-page', data: { name: 'Error' }, component: ErrorPageComponent },
       { path: 'admin', data: { name: 'Admin' },canActivate:[AuthGuard], component: AdminComponent },
       { path: 'guard', data: { name: 'Guard' }, component: GuardComponent },
+      { path: 'login', data: { name: 'Login' }, component: LoginComponent },
     ]),
     ReactiveFormsModule,
     FormsModule

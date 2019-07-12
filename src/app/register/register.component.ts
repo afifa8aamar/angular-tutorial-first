@@ -5,7 +5,8 @@ import {
   Validators,
   FormBuilder,
   FormGroup,
-  FormControl
+  FormControl,
+  AbstractControl
 } from '@angular/forms';
 
 @Component({
@@ -14,41 +15,54 @@ import {
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  valid = true;
   registerForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private UserService: UserService) {
     this.registerForm = this.formBuilder.group({
       email: ['', [RegisterValidators.Required, RegisterValidators.InvalidEmail]],
       passwords: this.formBuilder.group({
         password: ['', [RegisterValidators.Required, RegisterValidators.InvalidPassword]],
-        confirm: ['', [RegisterValidators.Required, RegisterValidators.InvalidPassword]],
+        confirm: ['', [RegisterValidators.Required]],
       }, {
-        PasswordsShouldMatch: RegisterComponent.PasswordsShouldMatch
+          validator: RegisterValidators.PasswordsShouldMatch
         }),
       nickname: ['', [RegisterValidators.Required, RegisterValidators.InvalidNickname]],
       phone: ['', [RegisterValidators.Required, RegisterValidators.InvalidPhone]],
       website: ['', [RegisterValidators.Required, RegisterValidators.InvalidWebsite]],
       agreement: ['', [RegisterValidators.Required, RegisterValidators.UncheckedAgreement]]
-    })
+    }, {
+        validator: RegisterValidators.InValidInputs
+      })
   }
 
   ngOnInit() {
   }
 
-  static PasswordsShouldMatch(FormGroup) {
-    const password = FormGroup.get('password').value;
-    const confirm = FormGroup.get('confirm').value;
-    if (password !== confirm)
-      return { PasswordsShouldMatch: { message: "Passwords should match" } };
-    return null;
+  setDefault() {
+    // this.checkoutForm.get('name').setValue("John Boe");
+    // this.checkoutForm.get('address').setValue("Tbilisi");
+    this.registerForm.patchValue({
+      email: 'afifa@gmail.com',
+      passwords :{
+        password : '1234567',
+        confirm:'1234567'
+      },
+      nickname: 'afifa',
+      phone: '+380123654789',
+      website: 'https://www.youtube.com/',
+    });
   }
 
   setUser(user: RegisterComponent) {
     window.alert("Registered Successfully")
     this.UserService.addUser(user);
+    window.alert(this.UserService.getUsers())
   }
   get email() {
     return this.registerForm.get('email') as FormControl;
+  }
+  get passwords() {
+    return this.registerForm.get('passwords') as FormGroup;
   }
   get password() {
     return this.registerForm.get('passwords.password') as FormControl;
@@ -69,5 +83,5 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('agreement') as FormControl;
   }
 
-  
+
 }

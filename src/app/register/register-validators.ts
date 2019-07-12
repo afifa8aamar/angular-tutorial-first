@@ -58,4 +58,26 @@ export class RegisterValidators {
         return null;
     }
 
+    static PasswordsShouldMatch(control: AbstractControl) {
+        const password = control.get('password').value;
+        const confirmPassword = control.get('confirm').value;
+        if (password !== confirmPassword)
+            return { PasswordsShouldMatch: { message: 'Passwords should match' } };
+        return null;
+    }
+
+    static InValidInputs(control: AbstractControl) {
+        const email = control.get('email').valid;
+        const passwords = control.get('passwords').valid;
+        const password = control.get('passwords.password').valid;
+        const confirm = control.get('passwords.confirm').valid;
+        const nickname = control.get('nickname').valid;
+        const phone = control.get('phone').valid;
+        const website = control.get('website').valid;
+        const agreement = control.get('agreement').value == true;
+        if (email && passwords && password && confirm && nickname && phone && website && agreement)
+            return null
+        return { InValidInputs: true }
+    }
+
 }
