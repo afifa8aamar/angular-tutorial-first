@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       this.LoginService.allowAccess();
     }
     else {
-      this.LoginService.blockEdit();
+      this.LoginService.blockAccess();
     }
 
   }

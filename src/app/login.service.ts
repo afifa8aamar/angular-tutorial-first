@@ -5,20 +5,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LoginService {
-  isAccessAllowd = false;
+  isAccessAllowed = false;
   isNotEditable = true;
   constructor() { }
 
   isUserAuthenticated() {
-    return this.isAccessAllowd;
+    return this.isAccessAllowed;
   }
   allowAccess() {
-    this.isAccessAllowd = true;
+    this.isAccessAllowed = true;
     this.isNotEditable = false;
   }
 
   blockAccess() {
-    this.isAccessAllowd = false;
+    this.isAccessAllowed = false;
     this.isNotEditable = true;
   }
 
