@@ -28,6 +28,7 @@ import { AdminComponent } from './admin/admin.component';
 import { GuardComponent } from './guard/guard.component';
 import { LoginComponent } from './login/login.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { RegisterEmployeeComponent } from './register-employee/register-employee.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { EmployeesComponent } from './employees/employees.component';
     GuardComponent,
     LoginComponent,
     EmployeesComponent,
+    RegisterEmployeeComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -72,10 +74,11 @@ import { EmployeesComponent } from './employees/employees.component';
       { path: 'dashboard/news', data: { name: 'News' }, component: NewsComponent },
       { path: 'dashboard/news/:articleId', data: { name: 'Article' }, component: ArticleComponent },
       { path: 'error-page', data: { name: 'Error' }, component: ErrorPageComponent },
-      { path: 'admin', data: { name: 'Admin' },canActivate:[AuthGuard], component: AdminComponent },
+      { path: 'admin', data: { name: 'Admin' }, canActivate: [AuthGuard], component: AdminComponent },
       { path: 'guard', data: { name: 'Guard' }, component: GuardComponent },
       { path: 'login', data: { name: 'Login' }, component: LoginComponent },
       { path: 'employees', data: { name: 'Employees' }, component: EmployeesComponent },
+      { path: 'employees/register', data: { name: 'Register-Employee' }, component: RegisterEmployeeComponent },
     ]),
     ReactiveFormsModule,
     FormsModule
