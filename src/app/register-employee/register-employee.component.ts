@@ -1,7 +1,8 @@
-import { RegisterEmployeeService } from './../register-employee.service';
+import { EmployeesService } from '../employees.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { RegisterValidators } from './register-validators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-employee',
@@ -12,40 +13,22 @@ export class RegisterEmployeeComponent implements OnInit {
   employees$;
   Response;
   empRegForm: FormGroup;
-  constructor(private FormBuilder: FormBuilder, private RegisterEmployeeService: RegisterEmployeeService) {
+  constructor(private FormBuilder: FormBuilder, private EmployeesService: EmployeesService, private router: Router) {
     this.empRegForm = this.FormBuilder.group({
       name: ['', [RegisterValidators.Required]],
-      salary: ['', [RegisterValidators.Required]],
-      age: ['', [RegisterValidators.Required]]
+      salary: ['', [RegisterValidators.Required, RegisterValidators.InvalidSalary]],
+      age: ['', [RegisterValidators.Required, RegisterValidators.InvalidAge]]
     })
   }
 
   ngOnInit() {
-    this.employees$ = this.RegisterEmployeeService.getEmployees();
-  }
-
-  get name() {
-    return this.empRegForm.get('name') as FormControl;
-  }
-
-  get salary() {
-    return this.empRegForm.get('salary') as FormControl;
-  }
-
-  get age() {
-    return this.empRegForm.get('age') as FormControl;
+    this.employees$ = this.EmployeesService.getEmployees();
   }
 
 
-  register() {
-    this.RegisterEmployeeService.registerEmplyee(this.empRegForm.value)
-      .subscribe(res => {
-        this.Response = res;
-      }, (e)=>{
-        this.Response = e.error
-      })
-
-      console.log(this.RegisterEmployeeService.registerEmplyee(this.empRegForm.value), this.Response  )
+  register(employee) {
+    this.EmployeesService.registerEmplyee(employee).subscribe();
+    this.router.navigate(['/employees']);
   }
 
 }

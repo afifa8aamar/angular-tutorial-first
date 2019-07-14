@@ -29,6 +29,7 @@ import { GuardComponent } from './guard/guard.component';
 import { LoginComponent } from './login/login.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { RegisterEmployeeComponent } from './register-employee/register-employee.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { RegisterEmployeeComponent } from './register-employee/register-employee
     LoginComponent,
     EmployeesComponent,
     RegisterEmployeeComponent,
+    EmployeeComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -79,6 +81,7 @@ import { RegisterEmployeeComponent } from './register-employee/register-employee
       { path: 'login', data: { name: 'Login' }, component: LoginComponent },
       { path: 'employees', data: { name: 'Employees' }, component: EmployeesComponent },
       { path: 'employees/register', data: { name: 'Register-Employee' }, component: RegisterEmployeeComponent },
+      {path: 'employee/:id', data: {name: 'Employee'}, component: EmployeeComponent},
     ]),
     ReactiveFormsModule,
     FormsModule

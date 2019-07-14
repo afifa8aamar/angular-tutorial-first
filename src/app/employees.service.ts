@@ -10,8 +10,7 @@ interface IEmployee {
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterEmployeeService {
-
+export class EmployeesService {
   host = `http://dummy.restapiexample.com/api/v1`;
 
   constructor(private HttpClient: HttpClient) { }
@@ -36,12 +35,12 @@ export class RegisterEmployeeService {
       }))
   }
 
-  registerEmplyee(employee : IEmployee) {
-    let emp = this.transformEmployee(employee);
-    return this.HttpClient.post(`${this.host}/create`, JSON.stringify(emp))
-  } 
+  registerEmplyee(employee: IEmployee) {
+    const url = `${this.host}/create`;
+    return this.HttpClient.post<IEmployee>(url, employee)
+  }
 
-  private transformEmployee(employee) {
+  transformEmployee(employee) {
     const { id, employee_age, employee_name, employee_salary } = employee;
     const employeeTransformed = {
       id,
@@ -52,4 +51,19 @@ export class RegisterEmployeeService {
     return employeeTransformed;
   }
 
+  getEmployee(Id) {
+    return this.HttpClient.get(`${this.host}/employee/${Id}`).pipe(map((employee: IEmployee) => {
+      return this.transformEmployee(employee);
+    }));
+  }
+
+  delete(employee) {
+    const url = `${this.host}/delete/${employee.id}`;
+    return this.HttpClient.delete(url, employee);
+  }
+  update(employee) {
+    const url = `${this.host}/update/${employee.id}`;
+    return this.HttpClient.put<IEmployee>(url, employee);
+  }
 }
+

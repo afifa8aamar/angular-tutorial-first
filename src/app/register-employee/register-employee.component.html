@@ -1,46 +1,27 @@
-<p>register-employee works!</p>
+<h1>Employee Register</h1>
 
-<table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Salary</th>
-                <th>Age</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor='let employee of employees$ | async'>
-                <td>{{employee.id}}</td>
-                <td>{{employee.name}}</td>
-                <td>{{employee.salary}}</td>
-                <td>{{employee.age}}</td>
-            </tr>
-        </tbody>
-    </table>
-
-<form [formGroup]='empRegForm' class="register-employee" (ngSubmit)="register()">
+<form [formGroup]='empRegForm' class="register-employee">
     <label>Name: </label>
     <input type="text" formControlName='name'>
-    <div *ngIf='name.invalid && (name.dirty || name.touched)'>
+    <div *ngIf='name?.invalid && (name.dirty || name.touched)'>
         <div class="General-Error" *ngIf="name.errors?.Required">
             {{name.errors.Required.message}}
         </div>
     </div>
     <label>Salary: </label>
     <input type="text" formControlName='salary'>
-    <div *ngIf='salary.invalid && (salary.dirty || salary.touched)'>
+    <div *ngIf='salary?.invalid && (salary.dirty || salary.touched)'>
         <div class="General-Error" *ngIf="salary.errors?.Required">
             {{salary.errors.Required.message}}
         </div>
     </div>
     <label>Age </label>
     <input type="text" formControlName='age'>
-    <div *ngIf='age.invalid && (age.dirty || age.touched)'>
+    <div *ngIf='age?.invalid && (age.dirty || age.touched)'>
         <div class="General-Error" *ngIf="age.errors?.Required">
             {{age.errors.Required.message}}
         </div>
     </div>
-    <button type="submit" (click)='register()'>Register</button>
+    <button type="button" (click)='register(empRegForm.value)'>Register</button>
 </form>
 
