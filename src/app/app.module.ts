@@ -1,3 +1,4 @@
+import { browser } from 'protractor';
 import { AuthGuard } from './auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -30,7 +31,7 @@ import { LoginComponent } from './login/login.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { RegisterEmployeeComponent } from './register-employee/register-employee.component';
 import { EmployeeComponent } from './employee/employee.component';
-
+import { MenuComponent } from './menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { EmployeeComponent } from './employee/employee.component';
     EmployeesComponent,
     RegisterEmployeeComponent,
     EmployeeComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserAnimationsModule,

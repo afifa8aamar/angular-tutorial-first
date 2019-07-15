@@ -1,0 +1,11 @@
+<div class="menu" [@openClose] = "isOpen ? 'open' : 'close'">
+    <div>
+        <h1>Menu</h1>
+        <a (click)='hideMenu()'></a>
+
+    </div>
+    <nav>
+        <a routerLink='/dashboard'>dashboard</a>
+        <a routerLink='/cart'>cart</a>
+    </nav>
+</div>

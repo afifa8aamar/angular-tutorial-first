@@ -8,7 +8,7 @@
         Convert
     </a>
 
-    <a [routerLink]="['employees/register']" class="button fancy-button register" >
+    <a [routerLink]="['employees/register']" class="button fancy-button register">
         <i class="material-icons">gavel</i>
         Register Employee
     </a>
@@ -39,3 +39,6 @@
     </a>
 
 </div>
+
+<button class="button fancy-button" (click)='menu.showMenu()'> <i class="material-icons">menu</i>Menu</button>
+<app-menu #menu></app-menu>
