@@ -1,7 +1,6 @@
 <div class="Wrapper">
     <h1>Employees</h1>
-    <div *ngIf="ShowLoader">Loading...</div>
-    <div [@progressBar]="ShowLoader ? 'show' : 'hide'" class="lds-default">
+     <div [@progressBar]="ShowLoader ? 'show' : 'hide'" class="lds-default">
         <div></div>
         <div></div>
         <div></div>
@@ -15,7 +14,7 @@
         <div></div>
         <div></div>
     </div>
-    <table>
+    <table *ngIf='!ShowLoader'>
         <thead>
             <tr>
                 <th>ID</th>

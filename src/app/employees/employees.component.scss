@@ -1,4 +1,3 @@
-
 table { 
     
 	width: 750px; 
@@ -81,6 +80,7 @@ only screen and (max-width: 760px),
 .lds-default {
 	display: inline-block;
 	position: fixed;
+	margin-top: 70px;
 	width: 64px;
 	height: 64px;
   }

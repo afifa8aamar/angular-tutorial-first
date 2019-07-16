@@ -30,28 +30,16 @@ export class EmployeesComponent implements OnInit {
   ShowLoader = true;
   employees$;
 
-  constructor(private EmployeesService: EmployeesService, private Router: Router) {
+  constructor(private EmployeesService: EmployeesService) {
     this.employees$ = this.EmployeesService.getEmployees();
-    this.Router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
-        this.ShowLoader = true;
-      }
-      if (event instanceof NavigationEnd) {
-        this.ShowLoader = false;
-      }
+    this.employees$.subscribe(data => {
+      this.employees$ = this.EmployeesService.getEmployees();
+      this.ShowLoader = false;
     })
   }
 
   ngOnInit() {
 
-  }
-
-  hideForm() {
-    this.ShowLoader = false;
-  }
-
-  showFrom() {
-    this.ShowLoader = true;
   }
 
 }
