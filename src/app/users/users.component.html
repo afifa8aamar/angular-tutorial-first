@@ -1,15 +1,23 @@
 <p>users works!</p>
 
 <div class="users-app" *ngFor='let user of users'>
-    <button class="button" type="button" (click)="logout()" [disabled]="isAllowEdit()" [routerLink]="['/login']">Log
-        out</button>
-    <span>Email: <input value='{{user.email}}'></span>
-    <span>Nickname: <input value='{{user.nickname}}' #nickname [disabled]="true"></span>
-    <span>Password: <input value='{{user.passwords.password}}'></span>
-    <span>Confirm Password: <input value='{{user.passwords.confirm}}'></span>
-    <span>Phone: <input value='{{user.phone}}'></span>
-    <span>Website: <input value='{{user.website}}'></span>
-    <span>Agreement: <a href="#"> agreement</a></span>
-    <button class="button" type="button" (click)="RemoveUser(user)" [disabled]="isAllowEdit()">Delete</button>
-    <button class="edit" type="button" (click)="EditUser()" [disabled]="isAllowEdit()">Edit</button>
+    <div class="MainForm" [@hideShow]="isHidden ? 'hide' : 'show'">
+        <button class="button" type="button" (click)="logout()" [disabled]="isAllowEdit()" [routerLink]="['/login']">Log
+            out</button>
+        <span>Email: <input value='{{user.email}}'></span>
+        <span>Nickname: <input value='{{user.nickname}}' #nickname [disabled]="true"></span>
+        <span>Password: <input value='{{user.passwords.password}}'></span>
+        <span>Confirm Password: <input value='{{user.passwords.confirm}}'></span>
+        <span>Phone: <input value='{{user.phone}}'></span>
+        <span>Website: <input value='{{user.website}}'></span>
+        <span>Agreement: <a href="#"> agreement</a></span>
+        <button class="button" type="button" (click)="hideForm()" [disabled]="isAllowEdit()">Delete</button>
+        <button class="edit" type="button" (click)="EditUser()" [disabled]="isAllowEdit()">Edit</button>
+
+    </div>
+    <div class="DeleteForm" [@hideShow]="isHidden ? 'show' : 'hide'">
+        <p>Do you really want to remove this user?</p>
+        <button class="button" type="button" (click)="RemoveUser(user)" >Delete</button>
+        <button type="button" (click)="showFrom()" >Cancle</button>
+    </div>
 </div>

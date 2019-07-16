@@ -2,13 +2,32 @@ import { LoginService } from './../login.service';
 import { UserService } from './../users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
+  animations: [
+    trigger('hideShow', [
+
+      state('show', style({
+        opacity: 1
+      })),
+      state('hide', style({
+        opacity: 0
+      })),
+      transition(':enter, :leave', animate(0))
+    ])
+  ]
 })
 export class UsersComponent implements OnInit {
+  isHidden = false;
   users;
   constructor(private UserService: UserService, private LoginService: LoginService) {
     this.users = this.UserService.getUsers();
@@ -56,5 +75,13 @@ export class UsersComponent implements OnInit {
   }
   logout() {
     this.LoginService.blockAccess();
+  }
+
+  hideForm() {
+    this.isHidden = true;
+  }
+
+  showFrom() {
+    this.isHidden = false;
   }
 }
