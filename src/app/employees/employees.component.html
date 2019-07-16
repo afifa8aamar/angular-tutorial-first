@@ -1,21 +1,37 @@
-<h1>Employees</h1>
+<div class="Wrapper">
+    <h1>Employees</h1>
+    <div *ngIf="ShowLoader">Loading...</div>
+    <div [@progressBar]="ShowLoader ? 'show' : 'hide'" class="lds-default">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let employee of employees$ | async'>
+                <td>{{employee.id}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.salary}}</td>
+                <td>{{employee.age}}</td>
+            </tr>
+        </tbody>
+    </table>
 
-
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Salary</th>
-            <th>Age</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor='let employee of employees$ | async'>
-            <td>{{employee.id}}</td>
-            <td>{{employee.name}}</td>
-            <td>{{employee.salary}}</td>
-            <td>{{employee.age}}</td>
-        </tr>
-    </tbody>
-</table>
+</div>

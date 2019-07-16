@@ -12,8 +12,7 @@ interface IEmployee {
 })
 export class EmployeesService {
   host = `http://dummy.restapiexample.com/api/v1`;
-
-  constructor(private HttpClient: HttpClient) { }
+  constructor(private HttpClient: HttpClient) {}
 
   getEmployees() {
     const url = `${this.host}/employees`;
