@@ -16,8 +16,6 @@ export class CartService {
         this.items = [];
         return this.items;
     }
-
-
     RemoveFromCart(product) {
         this.items.splice(this.items.indexOf(product), 1);
         return this.items;

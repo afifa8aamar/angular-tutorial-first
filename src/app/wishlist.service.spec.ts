@@ -16,7 +16,7 @@ describe('Auth service tests', () => {
             description: ''
         }
         wishList.addToWishlist(product);
-        expect(wishList.items).toEqual([product])
+        expect(wishList.items).toContain(product)
     })
 
     it('Method getItems should return items', () => {
